@@ -1,1 +1,3 @@
-# html-css-tryouts
+# Styling-gists
+
+tryouts using html, css, and JS
