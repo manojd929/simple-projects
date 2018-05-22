@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Spinner</title>
+	<link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+
+<body>
+	<div class="container container-1">
+		<h4>Border top and right changes</h4>
+		<p>
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+			text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+		</p>
+	</div>
+	<div class="container container-2">
+		<h4>Border top and bottom changes</h4>
+		<p>
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+			text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+		</p>
+	</div>
+
+	<div class="container container-3">
+		<h4>Border top and right only</h4>
+		<p>
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+			text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+		</p>
+	</div>
+
+
+	<script type="text/javascript">
+		var containers = document.querySelectorAll('.container p');
+		containers.forEach(function (item) {
+			item.style.display = 'none';
+		});
+		document.querySelector('.container-1').classList.add('spinner-1');
+		document.querySelector('.container-2').classList.add('spinner-2');
+		document.querySelector('.container-3').classList.add('spinner-3');
+		setTimeout(() => {
+			document.querySelector('.container-1').classList.remove('spinner-1');
+			document.querySelector('.container-2').classList.remove('spinner-2');
+			document.querySelector('.container-3').classList.remove('spinner-3');
+
+			var containers = document.querySelectorAll('.container p');
+			containers.forEach(function (item) {
+				item.style.display = 'block';
+			});
+		}, 4000);
+	</script>
+</body>
+
+</html>
