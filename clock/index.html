@@ -1,0 +1,116 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Clock</title>
+	</head>
+
+	<body>
+		<div class="clock">
+			<div class="clock-face">
+				<div class="hand hour-hand"></div>
+				<div class="hand minute-hand"></div>
+				<div class="hand second-hand"></div>
+			</div>
+		</div>
+
+		<style>
+			html {
+				background: rgba(19, 2, 2, 0.91);
+				font-size: 10px;
+			}
+
+			body {
+				margin: 0;
+				font-size: 2rem;
+				display: flex;
+				flex: 1;
+				min-height: 100vh;
+				align-items: center;
+			}
+
+			.clock {
+				width: 30rem;
+				height: 30rem;
+				border: 10px solid rgb(2, 236, 53);
+				border-radius: 50%;
+				margin: 50px auto;
+				position: relative;
+				padding: 2rem;
+				box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px white, inset 0 0 10px white, 0 0 10px rgba(0, 0, 0, 0.2);
+			}
+
+			.clock-face {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				transform: translateY(-3px);
+			}
+
+			.hand {
+				top: 50%;
+				height: 5px;
+				width: 50%;
+				background: white;
+				position: absolute;
+				transform: rotate(90deg);
+				transform-origin: 100%;
+				transition: all 1s;
+				transition-timing-function: cubic-bezier(0, 0, 0, 0);
+			}
+			
+			.hour-hand {
+				height: 6px;
+				width: 30%;
+				left: 20%;
+				background: teal;
+			}
+			.minute-hand {
+				height: 4px;
+				width: 40%;
+				left: 10%;
+				background: red;
+			}
+			.second-hand {
+				height: 2px;
+				background: #4682b4;
+			}
+
+		</style>
+
+		<script>
+			var hourHand = document.querySelector('.hour-hand');
+			var minuteHand = document.querySelector('.minute-hand');
+			var secondHand = document.querySelector('.second-hand');
+
+			function updateHandPositions() {
+				let currentTime = new Date();
+
+				let hour = currentTime.getHours();
+				let minute = currentTime.getMinutes();
+				let second = currentTime.getSeconds();
+
+				// additional 90 is added, because all hand(div) start along X-axis by default
+				// To align them vertically, rotate all hands by 90deg
+				let secondHandDegrees = ((second / 60) * 360) + 90;
+				let minuteHandDegrees = (((minute / 60) * 360) + 90) + ((second / 60) * 6);
+				let hourHandDegrees = (((hour / 60) * 720) + 90) + ((minute / 60) * 30);
+
+				console.log('Time      hh::mm::ss ', hour, minute, second);
+				console.log('Degrees   hh::mm::ss ', hourHandDegrees, minuteHandDegrees, secondHandDegrees);		
+				console.log('\n-------------------------------\n');
+				
+				// comment this part and have fun
+				hourHand.style.transition = (second === 0) ? 'all 0s' : 'all 1s';
+				minuteHand.style.transition = (second === 0) ? 'all 0s' : 'all 1s';
+				secondHand.style.transition = (second === 0) ? 'all 0s' : 'all 1s';
+
+				hourHand.style.transform = `rotate(${hourHandDegrees}deg)`;
+				minuteHand.style.transform = `rotate(${minuteHandDegrees}deg)`;
+				secondHand.style.transform = `rotate(${secondHandDegrees}deg)`;
+			}
+				
+			setInterval(updateHandPositions, 1000);
+			updateHandPositions();
+		</script>
+	</body>
+</html>
