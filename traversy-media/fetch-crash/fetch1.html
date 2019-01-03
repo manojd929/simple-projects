@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fetch API</title>
+</head>
+
+<body>
+  <button id="getText">
+    Get Text
+  </button>
+
+  <button id="getJson">
+    Get Json
+  </button>
+
+  <div id="output"></div>
+
+  <script>
+    document.getElementById('getText').addEventListener('click', getText);
+    function getText() {
+      fetch('sample.txt')
+        .then((res) => res.text())
+        .then((data) => document.getElementById('output').innerHTML = data)
+        .catch((error) => console.log(error));
+    }
+
+
+    document.getElementById('getJson').addEventListener('click', getJson);
+    function getJson() {
+      fetch('users.json')
+        .then((res) => res.json())
+        .then((data) => {
+          let output = '<h2>Users</h2>';
+          data.forEach(function(user) {
+            output += `
+              <ul>
+                <li>ID: ${user.id}</li>
+                <li>Name: ${user.name}</li>
+              </ul>
+            `;
+          });
+          document.getElementById('output').innerHTML = output
+        })
+        .catch((error) => console.log(error));
+    }
+
+    fetch('https://api.github.com', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, "/"',
+        'Content-type': "application/json"
+      },
+      body: JSON.stringify({ title: title, body: body })
+    })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+  </script>
+</body>
+
+</html>

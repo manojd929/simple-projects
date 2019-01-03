@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ajax1 File</title>
+</head>
+<body>
+  <button id="button">
+    Get Text File
+  </button>
+  <div id="text"></div>
+
+
+  <script>
+    // Create event listener
+    document.getElementById('button').addEventListener('click', loadText);
+    function loadText() {
+      // Create XHR Object
+      var xhr = new XMLHttpRequest();
+
+      // OPEN - type, url/file, async
+      xhr.open('GET', 'sample.txt', true);
+
+      console.log('OPEN READYSTATE: ', xhr.readyState);
+
+      // OPTIONAL
+      xhr.onprogress = function() {
+        console.log('ONPROGRESS READYSTATE: ', xhr.readyState);
+      }
+
+      xhr.onload = function() {
+        console.log('ONLOAD READYSTATE: ', xhr.readyState);
+        if (this.status == 200) {
+          document.getElementById('text').innerHTML = this.responseText;
+          console.log(this.responseText);
+        }
+      }
+
+      xhr.onerror = function() {
+        console.log('ONERROR READYSTATE: ', xhr.readyState);
+        console.log('Error occured')
+      }
+
+      // xhr.onreadystatechange = function() {
+      //   console.log('ONREADYSTATECHANGE READYSTATE: ', xhr.readyState);
+      //   if (this.readyState == 4 && this.status == 200) {
+      //     console.log(this.responseText);
+      //   }
+      // }
+
+      xhr.send();
+    }
+
+    // readyState values
+    // 1. request not initialized
+    // 2. server connection established
+    // 3. request received
+    // 4. processed request
+    // 5. request finished and response is ready
+
+  </script>
+</body>
+</html>
